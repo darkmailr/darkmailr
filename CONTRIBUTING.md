@@ -45,3 +45,19 @@ python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 pip install -r requirements-dev.txt
+
+Testing
+Run tests with:
+
+`python -m pytest tests/`
+
+Style Guide
+
+Follow PEP 8 for Python code
+Use meaningful variable names
+Add comments for complex logic
+Keep functions small and focused
+
+License
+By contributing, you agree that your contributions will be licensed under the MIT License.
+
