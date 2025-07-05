@@ -190,7 +190,7 @@ See [CHANGELOG.md](CHANGELOG.md) for version history.
 
 ---
 
-## Head of Social Engineering
+## Maintainer
 
 [january1073](https://github.com/january1073)
 
