@@ -31,10 +31,10 @@ Access at: `http://localhost:5000`
 
 ## Screenshots
 
-### Input 1
+### UI Part 1
 ![Main Interface](screenshots/screenshot1.png)
 
-### Input 2
+### UI Part 2
 ![Main Interface](screenshots/screenshot2.png)
 
 ### Generated Email Example
