@@ -1,13 +1,13 @@
 # 🚧 WORK IN PROGRESS -- PLEASE COME BACK LATER 🚧
 
-# Darkmailr
+# darkmailr
 
-An offline phishing email simulation tool using open-source LLMs (via Ollama or LocalAI). Designed for red team training, prompt injection research, and phishing detection development.
+An offline phishing email simulation tool using an open-source LLM (currently Ollama, LocalAI in progress). Designed for red team training, prompt injection research, and phishing detection development.
 
 ## Features
 - Local generation (no cloud API)
 - LAN-accessible Flask UI
-- Extensible with prompt testing, embeddings, tagging
+- Extensible with prompt testing, embeddings, tagging (in progress)
 
 ## Quickstart
 [Link to docs/INSTALL.md]
