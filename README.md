@@ -1,4 +1,4 @@
-# darkmailr - Offline Phishing Simulation Tool
+# darkmailr - Ollama Phishing Simulation Tool
 
 <p align="left">
   <!-- Project Info -->
