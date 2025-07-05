@@ -171,8 +171,8 @@ See [CHANGELOG.md](CHANGELOG.md) for version history.
 
 ---
 
-**Made with ❤️ for the cybersecurity community**
-
 ## Chief Fixer of Things
 
 [january1073](https://github.com/january1073)
+
+**Made with ❤️ for the cybersecurity community**
