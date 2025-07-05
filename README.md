@@ -1,8 +1,24 @@
 # darkmailr - Offline Phishing Simulation Tool
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![Ollama](https://img.shields.io/badge/Ollama-Compatible-green.svg)](https://ollama.com/)
+<p align="left">
+  <!-- Project Info -->
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square&logo=opensourceinitiative&logoColor=white" alt="License">
+  </a>
+  <a href="https://www.python.org/downloads/">
+    <img src="https://img.shields.io/badge/Python-3.9+-3670A0.svg?style=flat-square&logo=python&logoColor=white" alt="Python">
+  </a>
+  <a href="https://ollama.com/">
+    <img src="https://img.shields.io/badge/Ollama-Compatible-4BC51D.svg?style=flat-square&logo=ollama&logoColor=white" alt="Ollama">
+  </a>
+  <!-- Social Media -->
+  <a href="https://x.com/darkmailr">
+    <img src="https://img.shields.io/badge/.com-000000.svg?style=flat-square&logo=x&logoColor=white" alt="X.com">
+  </a>
+  <a href="https://www.linkedin.com/company/darkmailr">
+    <img src="https://img.shields.io/badge/LinkedIn-0A66C2.svg?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn">
+  </a>
+</p>
 
 **darkmailr** is a self-hosted, offline phishing simulation tool that uses open-source LLMs (via Ollama) to generate realistic, context-aware phishing emails for red team exercises, security awareness training, and prompt injection testing.
 
