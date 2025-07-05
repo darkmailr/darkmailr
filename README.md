@@ -18,6 +18,9 @@ An offline phishing email simulation tool using open-source LLMs (via Ollama or 
 ## Ethics & Usage
 [Link to ETHICS.md]
 
+## Project Maintainer
+- [january1073](https://linktr.ee/january1073)
+
 ---
 
 Contributions welcome! Star the repo if you find it useful:  
