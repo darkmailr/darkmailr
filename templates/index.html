@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DARKMAILR - OFFLINE PHISHING EMAIL SIMULATION TOOL</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #000000;
+            color: #ff1493;
+            line-height: 1.4;
+        }
+        .container {
+            background-color: #0a0a0a;
+            padding: 30px;
+            border: 2px solid #ff1493;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(255, 20, 147, 0.3);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo {
+            width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.5));
+        }
+        h2 {
+            color: #ff1493;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+            text-shadow: 0 0 15px rgba(255, 20, 147, 0.8);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .form-section {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid #ff1493;
+            border-radius: 8px;
+            background-color: #111111;
+            box-shadow: 0 0 15px rgba(255, 20, 147, 0.1);
+        }
+        .form-section h3 {
+            margin-top: 0;
+            color: #ff1493;
+            border-bottom: 2px solid #ff1493;
+            padding-bottom: 10px;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 20, 147, 0.6);
+        }
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        .form-row label {
+            min-width: 120px;
+            font-weight: bold;
+            color: #ff1493;
+            text-transform: uppercase;
+            font-size: 12px;
+            text-shadow: 0 0 5px rgba(255, 20, 147, 0.5);
+        }
+        .form-row input, .form-row select {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ff1493;
+            border-radius: 5px;
+            background-color: #000000;
+            color: #ff1493;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        .form-row input:focus, .form-row select:focus {
+            outline: none;
+            border-color: #ff69b4;
+            box-shadow: 0 0 15px rgba(255, 20, 147, 0.7);
+            background-color: #111111;
+        }
+        .vector-section {
+            background-color: #1a1a1a;
+            padding: 15px;
+            border: 1px solid #ff1493;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .vector-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .vector-item input[type="checkbox"] {
+            margin-right: 10px;
+            accent-color: #ff1493;
+            transform: scale(1.2);
+        }
+        .vector-item label {
+            color: #ff1493;
+            font-size: 12px;
+            text-transform: uppercase;
+            text-shadow: 0 0 5px rgba(255, 20, 147, 0.5);
+        }
+        .vector-item input[type="text"] {
+            margin-left: 10px;
+            flex: 1;
+            padding: 8px;
+            border: 2px solid #ff1493;
+            border-radius: 5px;
+            background-color: #000000;
+            color: #ff1493;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s ease;
+        }
+        .vector-item input[type="text"]:disabled {
+            background-color: #333333;
+            color: #666666;
+            border-color: #666666;
+        }
+        .vector-item input[type="text"]:focus {
+            outline: none;
+            border-color: #ff69b4;
+            box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+        }
+        .submit-btn {
+            background: linear-gradient(45deg, #ff1493, #ff69b4);
+            color: #000000;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin: 30px auto 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 20, 147, 0.4);
+        }
+        .submit-btn:hover {
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 30px rgba(255, 20, 147, 0.7);
+        }
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #111111;
+            border: 2px solid #ff1493;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(255, 20, 147, 0.2);
+        }
+        .result h3 {
+            color: #ff1493;
+            margin-top: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 20, 147, 0.6);
+        }
+        .result pre {
+            background-color: #000000;
+            padding: 20px;
+            border: 1px solid #ff1493;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.4;
+            color: #ff1493;
+            overflow-x: auto;
+            box-shadow: inset 0 0 10px rgba(255, 20, 147, 0.1);
+        }
+        .warning {
+            background: linear-gradient(45deg, #ff1493, #ff69b4);
+            color: #000000;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 25px rgba(255, 20, 147, 0.5);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 25px rgba(255, 20, 147, 0.5); }
+            50% { box-shadow: 0 0 35px rgba(255, 20, 147, 0.8); }
+            100% { box-shadow: 0 0 25px rgba(255, 20, 147, 0.5); }
+        }
+        /* Glowing effect for the container */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff1493, #ff69b4, #ff1493);
+            border-radius: 12px;
+            z-index: -1;
+            opacity: 0.3;
+            animation: borderGlow 3s ease-in-out infinite alternate;
+        }
+        @keyframes borderGlow {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.6; }
+        }
+        .container {
+            position: relative;
+        }
+    </style>
+    <script>
+        function toggleVectorInput(checkbox, inputId) {
+            const input = document.getElementById(inputId);
+            input.disabled = !checkbox.checked;
+            if (!checkbox.checked) {
+                input.value = '';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="{{ url_for('static', filename='logo.jpg') }}" style="height: 300px; width: 300px; border-radius: 40px;">
+        </div>
+        
+        <div class="warning">
+            <strong>⚠️ WARNING: ETHICAL USE ONLY ⚠️</strong><br>
+            THIS TOOL IS FOR EDUCATIONAL PURPOSES, RED TEAM EXERCISES, AND SECURITY AWARENESS TRAINING ONLY.
+        </div>
+
+        <form method="POST">
+            <!-- Sender Section -->
+            <div class="form-section">
+                <h3>Sender Information</h3>
+                <div class="form-row">
+                    <label for="sender_sex">Sex:</label>
+                    <select name="sender_sex" id="sender_sex" required>
+                        <option value="">Select...</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label for="sender_name">Name:</label>
+                    <input type="text" name="sender_name" id="sender_name" placeholder="John Doe" required>
+                </div>
+                <div class="form-row">
+                    <label for="sender_company">Company:</label>
+                    <input type="text" name="sender_company" id="sender_company" placeholder="Acme Corp" required>
+                </div>
+                <div class="form-row">
+                    <label for="sender_role">Role:</label>
+                    <input type="text" name="sender_role" id="sender_role" placeholder="IT Manager" required>
+                </div>
+                <div class="form-row">
+                    <label for="sender_email">Email:</label>
+                    <input type="email" name="sender_email" id="sender_email" placeholder="john.doe@acme.com" required>
+                </div>
+            </div>
+
+            <!-- Receiver Section -->
+            <div class="form-section">
+                <h3>Receiver Information</h3>
+                <div class="form-row">
+                    <label for="receiver_sex">Sex:</label>
+                    <select name="receiver_sex" id="receiver_sex" required>
+                        <option value="">Select...</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label for="receiver_name">Name:</label>
+                    <input type="text" name="receiver_name" id="receiver_name" placeholder="Jane Smith" required>
+                </div>
+                <div class="form-row">
+                    <label for="receiver_company">Company:</label>
+                    <input type="text" name="receiver_company" id="receiver_company" placeholder="Target Corp" required>
+                </div>
+                <div class="form-row">
+                    <label for="receiver_role">Role:</label>
+                    <input type="text" name="receiver_role" id="receiver_role" placeholder="Finance Director" required>
+                </div>
+                <div class="form-row">
+                    <label for="receiver_email">Email:</label>
+                    <input type="email" name="receiver_email" id="receiver_email" placeholder="jane.smith@target.com" required>
+                </div>
+            </div>
+
+            <!-- Topic Section -->
+            <div class="form-section">
+                <h3>Topic</h3>
+                <div class="form-row">
+                    <label for="topic">Subject:</label>
+                    <input type="text" name="topic" id="topic" placeholder="Urgent: Password Reset Required" required>
+                </div>
+            </div>
+
+            <!-- Vectors Section -->
+            <div class="form-section">
+                <h3>Attack Vectors</h3>
+                <div class="vector-section">
+                    <div class="vector-item">
+                        <input type="checkbox" name="include_phone" id="include_phone" value="1" onchange="toggleVectorInput(this, 'phone_number')">
+                        <label for="include_phone">📞 Include Phone Number:</label>
+                        <input type="text" name="phone_number" id="phone_number" placeholder="+1 (555) 123-4567" disabled>
+                    </div>
+                    <div class="vector-item">
+                        <input type="checkbox" name="include_weblink" id="include_weblink" value="1" onchange="toggleVectorInput(this, 'weblink')">
+                        <label for="include_weblink">🔗 Include Web Link:</label>
+                        <input type="text" name="weblink" id="weblink" placeholder="https://secure-login.example.com" disabled>
+                    </div>
+                    <div class="vector-item">
+                        <input type="checkbox" name="include_attachment" id="include_attachment" value="1" onchange="toggleVectorInput(this, 'attachment')">
+                        <label for="include_attachment">📎 Include Attachment:</label>
+                        <input type="text" name="attachment" id="attachment" placeholder="Important_Document.pdf" disabled>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">🚀 GENERATE PHISHING EMAIL</button>
+        </form>
+
+        {% if email %}
+        <div class="result">
+            <h3>Generated Email:</h3>
+            <pre>{{ email }}</pre>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
