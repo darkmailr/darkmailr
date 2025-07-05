@@ -171,7 +171,7 @@ See [CHANGELOG.md](CHANGELOG.md) for version history.
 
 ---
 
-## Chief Fixer of Things
+## Head of Social Engineering
 
 [january1073](https://github.com/january1073)
 
