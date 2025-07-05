@@ -31,11 +31,11 @@
 # Install Ollama
 curl -fsSL https://ollama.com/install.sh | sh
 
-# Start Ollama service
-ollama serve &
-
 # Download a model
 ollama run mistral
+
+# Start Ollama service
+ollama serve &
 
 # Clone and run Darkmailr
 git clone https://github.com/darkmailr/darkmailr.git
