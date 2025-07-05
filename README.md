@@ -1,4 +1,4 @@
-# darkmailr - Offline AI-Powered Phishing Simulation Tool
+# darkmailr - Generate realistic, context-aware phishing emails – air-gapped
 
 <p align="left">
   <!-- Project Info -->
