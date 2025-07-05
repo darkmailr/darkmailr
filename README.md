@@ -30,6 +30,26 @@ python app.py
 Access at: http://localhost:5000
 📸 Screenshots
 Main Interface
+🎯 Features
+
+✅ Offline Operation - No data leaves your network
+✅ LAN Accessible - Use from any device on your network
+✅ Open Source LLMs - Powered by Ollama (Mistral, Llama, etc.)
+✅ Context-Aware - Generates realistic, targeted phishing emails
+✅ Export Functionality - Save results for training purposes
+✅ Easy Setup - Single command installation
+
+🛠️ Installation
+Prerequisites
+
+Ubuntu 18.04+ (or similar Linux distribution)
+Python 3.9+
+4GB+ RAM (for LLM models)
+Network access for initial setup
+
+Step-by-Step Installation
+
+Install Ollama
 
 
 ## Project Maintainer
