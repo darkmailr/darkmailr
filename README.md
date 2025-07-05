@@ -1,4 +1,4 @@
-# darkmailr - Offline Phishing Simulation Tool
+# darkmailr - Offline AI-Powered Phishing Simulation Tool
 
 <p align="left">
   <!-- Project Info -->
