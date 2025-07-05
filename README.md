@@ -1,4 +1,4 @@
-# 🔥 darkmailr - Offline Phishing Simulation Tool
+# darkmailr - Offline Phishing Simulation Tool
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
@@ -6,7 +6,7 @@
 
 **darkmailr** is a self-hosted, offline phishing simulation tool that uses open-source LLMs (via Ollama) to generate realistic, context-aware phishing emails for red team exercises, security awareness training, and prompt injection testing.
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 # Install Ollama
@@ -29,7 +29,7 @@ python app.py
 
 Access at: `http://localhost:5000`
 
-## 📸 Screenshots
+## Screenshots
 
 ### Input 1
 ![Main Interface](screenshots/screenshot1.png)
@@ -40,16 +40,16 @@ Access at: `http://localhost:5000`
 ### Generated Email Example
 ![Generated Email](screenshots/screenshot3.png)
 
-## 🎯 Features
+## Features
 
-- ✅ **Offline Operation** - No data leaves your network
-- ✅ **LAN Accessible** - Use from any device on your network
-- ✅ **Open Source LLMs** - Powered by Ollama (Mistral, Llama, etc.)
-- ✅ **Context-Aware** - Generates realistic, targeted phishing emails
-- ✅ **Export Functionality** - Save results for training purposes
-- ✅ **Easy Setup** - Single command installation
+- **Offline Operation** - No data leaves your network
+- **LAN Accessible** - Use from any device on your network
+- **Open Source LLMs** - Powered by Ollama (Mistral, Llama, etc.)
+- **Context-Aware** - Generates realistic, targeted phishing emails
+- **Export Functionality** - Save results for training purposes
+- **Easy Setup** - Single command installation
 
-## 🛠️ Installation
+## Installation
 
 ### Prerequisites
 - Ubuntu 18.04+ (or similar Linux distribution)
@@ -92,7 +92,7 @@ Access at: `http://localhost:5000`
    - Local: `http://localhost:5000`
    - LAN: `http://YOUR_SERVER_IP:5000`
 
-## 🧪 Usage
+## Usage
 
 1. **Fill in Target Information**
    - Name: Target's name
@@ -109,7 +109,7 @@ Access at: `http://localhost:5000`
    - Generated emails are automatically saved to `generated_emails.txt`
    - Use for documentation and training materials
 
-## 🔧 Configuration
+## Configuration
 
 ### Changing the LLM Model
 Edit `app.py` and modify the model name:
@@ -123,17 +123,17 @@ Modify the prompt template in `app.py`:
 prompt = f"""Your custom prompt template here..."""
 ```
 
-## 🛡️ Ethics & Legal Disclaimer
+## Ethics & Legal Disclaimer
 
-**⚠️ IMPORTANT: This tool is for educational and authorized testing purposes only.**
+**IMPORTANT: This tool is for educational and authorized testing purposes only.**
 
-### ✅ Approved Uses:
+### Approved Uses:
 - Red team vs. blue team exercises
 - Security awareness training
 - Prompt injection robustness testing
 - Academic research with proper authorization
 
-### ❌ Prohibited Uses:
+### Prohibited Uses:
 - Targeting real individuals without consent
 - Sending emails to actual inboxes
 - Any malicious or illegal activities
@@ -141,7 +141,7 @@ prompt = f"""Your custom prompt template here..."""
 
 **Users are solely responsible for ensuring compliance with all applicable laws and regulations.**
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
@@ -151,21 +151,21 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guid
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🔄 Changelog
+## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) for version history.
 
-## 🆘 Support
+## Support
 
-- 🐛 **Bug Reports**: [Create an issue](https://github.com/darkmailr/darkmailr/issues)
-- 💡 **Feature Requests**: [Start a discussion](https://github.com/darkmailr/darkmailr/discussions)
-- 📚 **Documentation**: Check the [docs](docs/) folder
+- **Bug Reports**: [Create an issue](https://github.com/darkmailr/darkmailr/issues)
+- **Feature Requests**: [Start a discussion](https://github.com/darkmailr/darkmailr/discussions)
+- **Documentation**: Check the [docs](docs/) folder
 
-## 🌟 Star History
+## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=darkmailr/darkmailr&type=Date)](https://star-history.com/#darkmailr/darkmailr&Date)
 
@@ -173,6 +173,6 @@ See [CHANGELOG.md](CHANGELOG.md) for version history.
 
 **Made with ❤️ for the cybersecurity community**
 
-## Maintainer
+## Chief Fixer of Things
 
 [january1073](https://github.com/january1073)
