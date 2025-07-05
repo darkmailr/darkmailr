@@ -175,7 +175,6 @@ See [CHANGELOG.md](CHANGELOG.md) for version history.
 
 **Made with ❤️ for the cybersecurity community**
 
-
 ## Project Maintainer
 - [january1073](https://linktr.ee/january1073)
 
