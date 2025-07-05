@@ -1,3 +1,5 @@
+# 🚧 WORK IN PROGRESS -- PLEASE COME BACK LATER 🚧
+
 # Darkmailr
 
 An offline phishing email simulation tool using open-source LLMs (via Ollama or LocalAI). Designed for red team training, prompt injection research, and phishing detection development.
