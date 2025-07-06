@@ -41,7 +41,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 python app.py
 
-Step 3: Access at http://localhost:5000
+# Step 3: Access at http://localhost:5000
 ```
 
 ## Screenshots
