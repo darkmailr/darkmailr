@@ -71,7 +71,7 @@ Access at: `http://localhost:5000`
 ## Installation
 
 ### Prerequisites
-- Ubuntu 18.04+ (or similar Linux distribution)
+- Debian 10+ (or similar Linux distribution)
 - Python 3.9+
 - 4GB+ RAM (for LLM models)
 - Network access for initial setup
