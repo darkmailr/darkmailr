@@ -28,16 +28,12 @@
 ## Quick Start
 
 ```bash
-# Install Ollama
+# Step 1: Install and run Ollama, e.g., with Mistral
 curl -fsSL https://ollama.com/install.sh | sh
-
-# Download a model
-ollama run mistral
-
-# Start Ollama service
+ollama run mistral # Or any other model that runs on Ollama
 ollama serve &
 
-# Clone and run Darkmailr
+# Step 2: Clone and run darkmailr
 git clone https://github.com/darkmailr/darkmailr.git
 cd darkmailr
 python -m venv venv
@@ -46,7 +42,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Access at: `http://localhost:5000`
+Step 3: Access at `http://localhost:5000`
 
 ## Screenshots
 
