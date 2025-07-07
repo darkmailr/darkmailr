@@ -57,12 +57,12 @@ python app.py
 
 ## Features
 
-- **Offline Operation** - No data leaves your network
-- **LAN Accessible** - Use from any device on your network
-- **Open Source LLMs** - Powered by Ollama (Mistral, Llama, etc.)
-- **Context-Aware** - Generates realistic, targeted phishing emails
-- **Export Functionality** - Save results for training purposes
-- **Easy Setup** - Single command installation
+- **Offline operation** - No data leaves your network
+- **LAN accessible** - Use from any device on your network
+- **Open source LLMs** - Powered by Ollama (Mistral, Llama, etc.)
+- **Context-aware** - Generates realistic, targeted phishing emails
+- **Export functionality** - Save results for training purposes
+- **Easy setup** - Single command installation
 
 ## Installation
 
