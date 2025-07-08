@@ -44,16 +44,21 @@ python app.py
 # Step 3: Access at http://localhost:5000 or http://<your_server_ip>:5000
 ```
 
-## Screenshots
+## Screenshots & Usage
 
-### UI Part 1
+In darkmailr’s UI, first fill in the sender information, like sex, name, company, etc.
+
 ![Main Interface](screenshots/screenshot1.png)
 
-### UI Part 2
+Then, fill in the receiver information, topic of the phishing email, choose the attack vectors — phone number, web link, and/or attachment —, and click on “GENERATE PHISHING EMAIL”.
+
 ![Main Interface](screenshots/screenshot2.png)
 
-### Generated Email Example
+After some time, which depends on the processing power of your server machine, darkmailr outputs a phishing email based on your input. On a machine with 16 GB RAM and 4 CPUs (no GPU), for instance, the creation of 1 message took ~30 seconds.
+
 ![Generated Email](screenshots/screenshot3.png)
+
+The output is quite "convincing".
 
 ## Features
 
@@ -64,65 +69,11 @@ python app.py
 - **Export functionality** - Save results for training purposes
 - **Easy setup** - Single command installation
 
-## Installation
-
-### Prerequisites
+## Prerequisites
 - Debian 10+ (or similar Linux distribution)
 - Python 3.9+
 - 4GB+ RAM (for LLM)
 - Network access for initial setup
-
-### Step-by-Step Installation
-
-1. **Install Ollama**
-   ```bash
-   curl -fsSL https://ollama.com/install.sh | sh
-   ```
-
-2. **Download a LLM, e.g. Mistral**
-   ```bash
-   ollama run mistral
-   ```
-
-3. **Run Ollama**
-   ```bash
-   ollama serve &
-   ```
-
-4. **Install darkmailr**
-   ```bash
-   git clone https://github.com/darkmailr/darkmailr.git
-   cd darkmailr
-   python -m venv venv
-   source venv/bin/activate
-   pip install -r requirements.txt
-   ```
-
-5. **Run the Application**
-   ```bash
-   python app.py
-   ```
-
-6. **Access the Interface**
-   - Local: `http://localhost:5000`
-   - LAN: `http://<your_server_ip>:5000`
-
-## Usage
-
-1. **Fill in Target Information**
-   - Name: Target's name
-   - Company: Target's organization
-   - Role: Target's job title
-   - Topic: Phishing scenario topic
-
-2. **Generate Email**
-   - Click "Generate Email"
-   - Review the generated phishing email
-   - Use for training or testing purposes
-
-3. **Export Results**
-   - Generated emails are automatically saved to `generated_emails.txt`
-   - Use for documentation and training materials
 
 ## Configuration
 
