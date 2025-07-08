@@ -41,7 +41,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 python app.py
 
-# Step 3: Access at http://localhost:5000
+# Step 3: Access at http://localhost:5000 or http://<your_server_ip>:5000
 ```
 
 ## Screenshots
@@ -69,7 +69,7 @@ python app.py
 ### Prerequisites
 - Debian 10+ (or similar Linux distribution)
 - Python 3.9+
-- 4GB+ RAM (for LLM models)
+- 4GB+ RAM (for LLM)
 - Network access for initial setup
 
 ### Step-by-Step Installation
@@ -79,14 +79,14 @@ python app.py
    curl -fsSL https://ollama.com/install.sh | sh
    ```
 
-2. **Download a Model**
+2. **Download a LLM, e.g. Mistral**
    ```bash
    ollama run mistral
    ```
 
-3. **Start Ollama Service**
+3. **Run Ollama**
    ```bash
-   ollama serve
+   ollama serve &
    ```
 
 4. **Install darkmailr**
@@ -105,7 +105,7 @@ python app.py
 
 6. **Access the Interface**
    - Local: `http://localhost:5000`
-   - LAN: `http://YOUR_SERVER_IP:5000`
+   - LAN: `http://<your_server_ip>:5000`
 
 ## Usage
 
@@ -140,7 +140,7 @@ prompt = f"""Your custom prompt template here..."""
 
 ## Ethics & Legal Disclaimer
 
-**IMPORTANT: This tool is for educational and authorized testing purposes only.**
+**Important: This tool is for educational and authorized testing purposes only. Users are solely responsible for ensuring compliance with all applicable laws and regulations**
 
 ### Approved Uses:
 - Red team vs. blue team exercises
@@ -153,8 +153,6 @@ prompt = f"""Your custom prompt template here..."""
 - Sending emails to actual inboxes
 - Any malicious or illegal activities
 - Violating organizational policies
-
-**Users are solely responsible for ensuring compliance with all applicable laws and regulations.**
 
 ## Contributing
 
