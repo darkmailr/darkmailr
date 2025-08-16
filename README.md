@@ -67,7 +67,6 @@ The output is quite "convincing".
 - **Open source LLMs** - Powered by Ollama (Mistral, Llama, etc.)
 - **Context-aware** - Generates realistic, targeted phishing emails
 - **Export functionality** - Save results for training purposes
-- **Easy setup** - Single command installation
 
 ## Prerequisites
 - Debian 10+ (or similar Linux distribution)
@@ -142,3 +141,4 @@ See [CHANGELOG.md](CHANGELOG.md) for version history.
 ---
 
 ### [Can you spot when you’re being phished?](https://phishingquiz.withgoogle.com)
+
