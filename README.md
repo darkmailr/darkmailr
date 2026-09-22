@@ -13,16 +13,6 @@
   </a>
 </p>
 
-<p align="left">
-  <!-- Social Media -->
-  <a href="https://x.com/darkmailr">
-    <img src="https://img.shields.io/badge/.com-000000.svg?style=for-the-badge&logo=x&logoColor=white" alt="X (Twitter)">
-  </a>
-  <a href="https://www.linkedin.com/company/darkmailr">
-    <img src="https://img.shields.io/badge/LinkedIn-0A66C2.svg?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
-  </a>
-</p>
-
 **darkmailr** is a self-hosted, offline phishing simulation tool that uses open-source LLMs (via Ollama) to generate realistic, context-aware phishing emails for red team exercises, security awareness training, and prompt injection testing.
 
 ## Quick Start
