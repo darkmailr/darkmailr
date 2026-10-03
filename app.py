@@ -7,11 +7,9 @@ app = Flask(__name__)
 OLLAMA_HOST = "http://localhost:11434"
 GENERATE_TIMEOUT = 180  # seconds; reasoning models (e.g. qwen3) can be slow on CPU
 
-
 def strip_think_tags(text):
     """Remove <think>...</think> reasoning traces some models emit before the answer."""
     return re.sub(r"<think>.*?</think>\s*", "", text, flags=re.DOTALL).strip()
-
 
 def get_available_models():
     """Fetch the list of models currently pulled in the local Ollama instance."""
@@ -24,7 +22,6 @@ def get_available_models():
     except requests.exceptions.RequestException:
         pass
     return []
-
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -99,7 +96,6 @@ REQUIREMENTS:
   versions, or repeat any greeting, sentence, or sign-off
 """
 
-        # Add vectors if selected
         if include_phone and phone_number:
             prompt += f"\n- Include this phone number in the email: {phone_number}"
         
