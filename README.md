@@ -16,7 +16,7 @@
 **darkmailr** is a self-hosted, offline phishing simulation tool that uses open-source LLMs (via Ollama) to generate realistic, context-aware phishing emails for red team exercises and security awareness training.
 
 ## Requirements
-- Debian 10+ (or similar Linux distribution such as Ubuntu, Linux Mint, Kali Linux or Rspberry Pi OS)
+- Debian 10+ (or similar Linux distribution such as Ubuntu, Linux Mint, Kali Linux or Raspberry Pi OS)
 - Ollama + LLM (uncensored/abliterated models recommended)
 - Python 3
 - 4GB+ RAM (for LLM)
