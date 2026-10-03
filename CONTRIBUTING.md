@@ -1,6 +1,6 @@
 # Contributing to darkmailr
 
-Thank you for your interest in contributing to darkmailr! We welcome contributions from the cybersecurity community.
+Thank you for your interest in contributing to darkmailr! I welcome contributions from the cybersecurity community.
 
 ## Code of Conduct
 

@@ -1,350 +1,584 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>DARKMAILR - OFFLINE PHISHING EMAIL SIMULATION TOOL</title>
-    <style>
-        body {
-            font-family: 'Courier New', monospace;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #000000;
-            color: #ff1493;
-            line-height: 1.4;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>darkmailr — offline phishing email simulation tool</title>
+<link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='darkmailr_icon_32.png') }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='darkmailr_icon_180.png') }}">
+<style>
+    :root {
+        --black: #000000;
+        --ink: #111111;
+        --grey-700: #3f3f3f;
+        --grey-500: #6b6b6b;
+        --grey-300: #b8b8b8;
+        --grey-150: #e4e4e4;
+        --grey-100: #f1f1f1;
+        --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+        font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: var(--white);
+        color: var(--ink);
+        line-height: 1.55;
+    }
+
+    a { color: inherit; }
+
+    .shell {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 64px 24px 48px;
+    }
+
+    /* ---------- header ---------- */
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 8px;
+    }
+
+    .brand img {
+        height: 112px;
+        width: auto;
+        display: block;
+    }
+
+    .toolbar-row {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 24px;
+    }
+
+    .reset-btn {
+        flex-shrink: 0;
+        display: inline-block;
+        padding: 8px 16px;
+        border: 1px solid var(--grey-300);
+        border-radius: 3px;
+        background: var(--white);
+        color: var(--grey-700);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: border-color 0.15s ease, color 0.15s ease;
+    }
+
+    .reset-btn:hover {
+        border-color: var(--black);
+        color: var(--black);
+    }
+
+    .header-rule {
+        height: 1px;
+        background: var(--black);
+        margin: 28px 0 40px;
+    }
+
+    /* ---------- sections ---------- */
+
+    .section {
+        margin-bottom: 40px;
+    }
+
+    .section-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--grey-150);
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    .section-head h2 {
+        font-size: 15px;
+        font-weight: 700;
+        margin: 0;
+        letter-spacing: 0.2px;
+    }
+
+    .section-head .count {
+        font-size: 12px;
+        color: var(--grey-500);
+        font-variant-numeric: tabular-nums;
+    }
+
+    .field {
+        display: grid;
+        grid-template-columns: 140px 1fr;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 14px;
+    }
+
+    .field label {
+        font-size: 13px;
+        color: var(--grey-700);
+    }
+
+    .field input,
+    .field select {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid var(--grey-300);
+        border-radius: 3px;
+        background: var(--white);
+        color: var(--ink);
+        font-family: inherit;
+        font-size: 14px;
+        transition: border-color 0.15s ease;
+    }
+
+    .field input::placeholder { color: var(--grey-300); }
+
+    .field input:focus,
+    .field select:focus {
+        outline: none;
+        border-color: var(--black);
+    }
+
+    .field select {
+        appearance: none;
+        -webkit-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23111111' stroke-width='1.4' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        padding-right: 30px;
+    }
+
+    /* ---------- vectors ---------- */
+
+    .vector-row {
+        display: grid;
+        grid-template-columns: 24px 160px 1fr;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--grey-150);
+    }
+
+    .vector-row:last-child { border-bottom: none; }
+
+    .vector-row input[type="checkbox"] {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 18px;
+        height: 18px;
+        border: 1px solid var(--grey-300);
+        border-radius: 3px;
+        margin: 0;
+        position: relative;
+        cursor: pointer;
+        transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .vector-row input[type="checkbox"]:checked {
+        background: var(--black);
+        border-color: var(--black);
+    }
+
+    .vector-row input[type="checkbox"]:checked::after {
+        content: "";
+        position: absolute;
+        left: 5px;
+        top: 1px;
+        width: 5px;
+        height: 10px;
+        border: solid var(--white);
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+    }
+
+    .vector-row label {
+        font-size: 14px;
+        color: var(--ink);
+        cursor: pointer;
+    }
+
+    .vector-row input[type="text"] {
+        width: 100%;
+        padding: 9px 12px;
+        border: 1px solid var(--grey-300);
+        border-radius: 3px;
+        font-family: inherit;
+        font-size: 14px;
+        color: var(--ink);
+        background: var(--white);
+        transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+    }
+
+    .vector-row input[type="text"]:focus {
+        outline: none;
+        border-color: var(--black);
+    }
+
+    .vector-row input[type="text"]:disabled {
+        background: var(--grey-100);
+        color: var(--grey-300);
+        border-color: var(--grey-150);
+    }
+
+    /* ---------- submit ---------- */
+
+    .submit-row {
+        margin-top: 44px;
+    }
+
+    .submit-btn {
+        width: 100%;
+        background: var(--black);
+        color: var(--white);
+        border: 1px solid var(--black);
+        border-radius: 3px;
+        padding: 15px 20px;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        cursor: pointer;
+        transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .submit-btn:hover {
+        background: var(--white);
+        color: var(--black);
+    }
+
+    .submit-btn:active {
+        background: var(--grey-100);
+    }
+
+    /* ---------- result ---------- */
+
+    .result {
+        margin-top: 48px;
+        border: 1px solid var(--black);
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .result-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 18px;
+        background: var(--black);
+        color: var(--white);
+    }
+
+    .result-head h3 {
+        margin: 0;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+    }
+
+    .copy-btn {
+        background: transparent;
+        border: 1px solid var(--grey-500);
+        color: var(--white);
+        border-radius: 3px;
+        padding: 6px 12px;
+        font-family: inherit;
+        font-size: 12px;
+        cursor: pointer;
+        transition: border-color 0.15s ease;
+    }
+
+    .copy-btn:hover { border-color: var(--white); }
+
+    .result pre {
+        margin: 0;
+        padding: 22px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 13px;
+        line-height: 1.6;
+        color: var(--ink);
+        white-space: pre-wrap;
+        word-break: break-word;
+    }
+
+    /* ---------- footer ---------- */
+
+    .footer {
+        margin-top: 64px;
+        padding-top: 20px;
+        border-top: 1px solid var(--grey-150);
+        text-align: center;
+        font-size: 12px;
+        color: var(--grey-500);
+    }
+
+    .footer a {
+        color: var(--grey-500);
+        text-decoration: none;
+        border-bottom: 1px solid var(--grey-300);
+        padding-bottom: 1px;
+        transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .footer a:hover {
+        color: var(--black);
+        border-color: var(--black);
+    }
+
+    @media (max-width: 560px) {
+        .field,
+        .vector-row {
+            grid-template-columns: 1fr;
+            gap: 6px;
         }
-        .container {
-            background-color: #0a0a0a;
-            padding: 30px;
-            border: 2px solid #ff1493;
-            border-radius: 10px;
-            box-shadow: 0 0 30px rgba(255, 20, 147, 0.3);
+        .vector-row {
+            grid-template-columns: 24px 1fr;
         }
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
+        .vector-row input[type="text"] {
+            grid-column: 1 / -1;
+            margin-top: 6px;
         }
-        .logo {
-            width: 200px;
-            height: auto;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.5));
-        }
-        h2 {
-            color: #ff1493;
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 24px;
-            text-shadow: 0 0 15px rgba(255, 20, 147, 0.8);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        .form-section {
-            margin-bottom: 25px;
-            padding: 20px;
-            border: 1px solid #ff1493;
-            border-radius: 8px;
-            background-color: #111111;
-            box-shadow: 0 0 15px rgba(255, 20, 147, 0.1);
-        }
-        .form-section h3 {
-            margin-top: 0;
-            color: #ff1493;
-            border-bottom: 2px solid #ff1493;
-            padding-bottom: 10px;
-            font-size: 16px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(255, 20, 147, 0.6);
-        }
-        .form-row {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-            align-items: center;
-        }
-        .form-row label {
-            min-width: 120px;
-            font-weight: bold;
-            color: #ff1493;
-            text-transform: uppercase;
-            font-size: 12px;
-            text-shadow: 0 0 5px rgba(255, 20, 147, 0.5);
-        }
-        .form-row input, .form-row select {
-            flex: 1;
-            padding: 10px;
-            border: 2px solid #ff1493;
-            border-radius: 5px;
-            background-color: #000000;
-            color: #ff1493;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-        .form-row input:focus, .form-row select:focus {
-            outline: none;
-            border-color: #ff69b4;
-            box-shadow: 0 0 15px rgba(255, 20, 147, 0.7);
-            background-color: #111111;
-        }
-        .vector-section {
-            background-color: #1a1a1a;
-            padding: 15px;
-            border: 1px solid #ff1493;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-        .vector-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .vector-item input[type="checkbox"] {
-            margin-right: 10px;
-            accent-color: #ff1493;
-            transform: scale(1.2);
-        }
-        .vector-item label {
-            color: #ff1493;
-            font-size: 12px;
-            text-transform: uppercase;
-            text-shadow: 0 0 5px rgba(255, 20, 147, 0.5);
-        }
-        .vector-item input[type="text"] {
-            margin-left: 10px;
-            flex: 1;
-            padding: 8px;
-            border: 2px solid #ff1493;
-            border-radius: 5px;
-            background-color: #000000;
-            color: #ff1493;
-            font-family: 'Courier New', monospace;
-            transition: all 0.3s ease;
-        }
-        .vector-item input[type="text"]:disabled {
-            background-color: #333333;
-            color: #666666;
-            border-color: #666666;
-        }
-        .vector-item input[type="text"]:focus {
-            outline: none;
-            border-color: #ff69b4;
-            box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
-        }
-        .submit-btn {
-            background: linear-gradient(45deg, #ff1493, #ff69b4);
-            color: #000000;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            display: block;
-            margin: 30px auto 0;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(255, 20, 147, 0.4);
-        }
-        .submit-btn:hover {
-            background: linear-gradient(45deg, #ff69b4, #ff1493);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 30px rgba(255, 20, 147, 0.7);
-        }
-        .submit-btn:active {
-            transform: translateY(0);
-        }
-        .result {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #111111;
-            border: 2px solid #ff1493;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(255, 20, 147, 0.2);
-        }
-        .result h3 {
-            color: #ff1493;
-            margin-top: 0;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(255, 20, 147, 0.6);
-        }
-        .result pre {
-            background-color: #000000;
-            padding: 20px;
-            border: 1px solid #ff1493;
-            border-radius: 5px;
-            white-space: pre-wrap;
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            line-height: 1.4;
-            color: #ff1493;
-            overflow-x: auto;
-            box-shadow: inset 0 0 10px rgba(255, 20, 147, 0.1);
-        }
-        .warning {
-            background: linear-gradient(45deg, #ff1493, #ff69b4);
-            color: #000000;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            text-align: center;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 0 25px rgba(255, 20, 147, 0.5);
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 25px rgba(255, 20, 147, 0.5); }
-            50% { box-shadow: 0 0 35px rgba(255, 20, 147, 0.8); }
-            100% { box-shadow: 0 0 25px rgba(255, 20, 147, 0.5); }
-        }
-        /* Glowing effect for the container */
-        .container::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #ff1493, #ff69b4, #ff1493);
-            border-radius: 12px;
-            z-index: -1;
-            opacity: 0.3;
-            animation: borderGlow 3s ease-in-out infinite alternate;
-        }
-        @keyframes borderGlow {
-            0% { opacity: 0.3; }
-            100% { opacity: 0.6; }
-        }
-        .container {
-            position: relative;
-        }
-    </style>
-    <script>
-        function toggleVectorInput(checkbox, inputId) {
-            const input = document.getElementById(inputId);
-            input.disabled = !checkbox.checked;
-            if (!checkbox.checked) {
-                input.value = '';
-            }
-        }
-    </script>
+    }
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <img src="{{ url_for('static', filename='logo.jpg') }}" style="height: 300px; width: 300px; border-radius: 40px;">
-        </div>
-        
-        <div class="warning">
-            <strong>⚠️ WARNING: ETHICAL USE ONLY ⚠️</strong><br>
-            THIS TOOL IS FOR EDUCATIONAL PURPOSES, RED TEAM EXERCISES, AND SECURITY AWARENESS TRAINING ONLY.
-        </div>
+<div class="shell">
 
-        <form method="POST">
-            <!-- Sender Section -->
-            <div class="form-section">
-                <h3>Sender Information</h3>
-                <div class="form-row">
-                    <label for="sender_sex">Sex:</label>
-                    <select name="sender_sex" id="sender_sex" required>
-                        <option value="">Select...</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                </div>
-                <div class="form-row">
-                    <label for="sender_name">Name:</label>
-                    <input type="text" name="sender_name" id="sender_name" placeholder="John Doe" required>
-                </div>
-                <div class="form-row">
-                    <label for="sender_company">Company:</label>
-                    <input type="text" name="sender_company" id="sender_company" placeholder="Acme Corp" required>
-                </div>
-                <div class="form-row">
-                    <label for="sender_role">Role:</label>
-                    <input type="text" name="sender_role" id="sender_role" placeholder="IT Manager" required>
-                </div>
-                <div class="form-row">
-                    <label for="sender_email">Email:</label>
-                    <input type="email" name="sender_email" id="sender_email" placeholder="john.doe@acme.com" required>
-                </div>
-            </div>
+    <header class="brand">
+        <img src="{{ url_for('static', filename='darkmailr_logo.png') }}" alt="darkmailr">
+    </header>
+    <div class="header-rule"></div>
 
-            <!-- Receiver Section -->
-            <div class="form-section">
-                <h3>Receiver Information</h3>
-                <div class="form-row">
-                    <label for="receiver_sex">Sex:</label>
-                    <select name="receiver_sex" id="receiver_sex" required>
-                        <option value="">Select...</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                </div>
-                <div class="form-row">
-                    <label for="receiver_name">Name:</label>
-                    <input type="text" name="receiver_name" id="receiver_name" placeholder="Jane Smith" required>
-                </div>
-                <div class="form-row">
-                    <label for="receiver_company">Company:</label>
-                    <input type="text" name="receiver_company" id="receiver_company" placeholder="Target Corp" required>
-                </div>
-                <div class="form-row">
-                    <label for="receiver_role">Role:</label>
-                    <input type="text" name="receiver_role" id="receiver_role" placeholder="Finance Director" required>
-                </div>
-                <div class="form-row">
-                    <label for="receiver_email">Email:</label>
-                    <input type="email" name="receiver_email" id="receiver_email" placeholder="jane.smith@target.com" required>
-                </div>
-            </div>
-
-            <!-- Topic Section -->
-            <div class="form-section">
-                <h3>Topic</h3>
-                <div class="form-row">
-                    <label for="topic">Subject:</label>
-                    <input type="text" name="topic" id="topic" placeholder="Urgent: Password Reset Required" required>
-                </div>
-            </div>
-
-            <!-- Vectors Section -->
-            <div class="form-section">
-                <h3>Attack Vectors</h3>
-                <div class="vector-section">
-                    <div class="vector-item">
-                        <input type="checkbox" name="include_phone" id="include_phone" value="1" onchange="toggleVectorInput(this, 'phone_number')">
-                        <label for="include_phone">📞 Include Phone Number:</label>
-                        <input type="text" name="phone_number" id="phone_number" placeholder="+1 (555) 123-4567" disabled>
-                    </div>
-                    <div class="vector-item">
-                        <input type="checkbox" name="include_weblink" id="include_weblink" value="1" onchange="toggleVectorInput(this, 'weblink')">
-                        <label for="include_weblink">🔗 Include Web Link:</label>
-                        <input type="text" name="weblink" id="weblink" placeholder="https://secure-login.example.com" disabled>
-                    </div>
-                    <div class="vector-item">
-                        <input type="checkbox" name="include_attachment" id="include_attachment" value="1" onchange="toggleVectorInput(this, 'attachment')">
-                        <label for="include_attachment">📎 Include Attachment:</label>
-                        <input type="text" name="attachment" id="attachment" placeholder="Important_Document.pdf" disabled>
-                    </div>
-                </div>
-            </div>
-
-            <button type="submit" class="submit-btn">🚀 GENERATE PHISHING EMAIL</button>
-        </form>
-
-        {% if email %}
-        <div class="result">
-            <h3>Generated Email:</h3>
-            <pre>{{ email }}</pre>
-        </div>
-        {% endif %}
+    <div class="toolbar-row">
+        <a href="{{ url_for('index') }}" class="reset-btn" title="Clear all fields">Reset</a>
     </div>
+
+    <form method="POST">
+
+        <div class="section">
+            <div class="section-head">
+                <h2>Sender (impersonated)</h2>
+                <span class="count">01</span>
+            </div>
+            <div class="field">
+                <label for="sender_sex">Sex</label>
+                <select name="sender_sex" id="sender_sex" required>
+                    <option value="">Select</option>
+                    <option value="male" {% if form_data.get('sender_sex') == 'male' %}selected{% endif %}>Male</option>
+                    <option value="female" {% if form_data.get('sender_sex') == 'female' %}selected{% endif %}>Female</option>
+                </select>
+            </div>
+            <div class="field">
+                <label for="sender_first_name">First name</label>
+                <input type="text" name="sender_first_name" id="sender_first_name" placeholder="John" value="{{ form_data.get('sender_first_name', '') }}" required>
+            </div>
+            <div class="field">
+                <label for="sender_last_name">Family name</label>
+                <input type="text" name="sender_last_name" id="sender_last_name" placeholder="Doe" value="{{ form_data.get('sender_last_name', '') }}" required>
+            </div>
+            <div class="field">
+                <label for="sender_company">Company</label>
+                <input type="text" name="sender_company" id="sender_company" placeholder="Acme Corp" value="{{ form_data.get('sender_company', '') }}" required>
+            </div>
+            <div class="field">
+                <label for="sender_role">Role</label>
+                <input type="text" name="sender_role" id="sender_role" placeholder="IT Manager" value="{{ form_data.get('sender_role', '') }}" required>
+            </div>
+            <div class="field">
+                <label for="sender_email">Email</label>
+                <input type="email" name="sender_email" id="sender_email" placeholder="john.doe@acme.com" value="{{ form_data.get('sender_email', '') }}" required>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-head">
+                <h2>Receiver (target)</h2>
+                <span class="count">02</span>
+            </div>
+            <div class="field">
+                <label for="receiver_sex">Sex</label>
+                <select name="receiver_sex" id="receiver_sex" required>
+                    <option value="">Select</option>
+                    <option value="male" {% if form_data.get('receiver_sex') == 'male' %}selected{% endif %}>Male</option>
+                    <option value="female" {% if form_data.get('receiver_sex') == 'female' %}selected{% endif %}>Female</option>
+                </select>
+            </div>
+            <div class="field">
+                <label for="receiver_first_name">First name</label>
+                <input type="text" name="receiver_first_name" id="receiver_first_name" placeholder="Jane" value="{{ form_data.get('receiver_first_name', '') }}" required>
+            </div>
+            <div class="field">
+                <label for="receiver_last_name">Family name</label>
+                <input type="text" name="receiver_last_name" id="receiver_last_name" placeholder="Smith" value="{{ form_data.get('receiver_last_name', '') }}" required>
+            </div>
+            <div class="field">
+                <label for="receiver_company">Company</label>
+                <input type="text" name="receiver_company" id="receiver_company" placeholder="Target Corp" value="{{ form_data.get('receiver_company', '') }}" required>
+            </div>
+            <div class="field">
+                <label for="receiver_role">Role</label>
+                <input type="text" name="receiver_role" id="receiver_role" placeholder="Finance Director" value="{{ form_data.get('receiver_role', '') }}" required>
+            </div>
+            <div class="field">
+                <label for="receiver_email">Email</label>
+                <input type="email" name="receiver_email" id="receiver_email" placeholder="jane.smith@target.com" value="{{ form_data.get('receiver_email', '') }}" required>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-head">
+                <h2>Topic</h2>
+                <span class="count">03</span>
+            </div>
+            <div class="field">
+                <label for="topic">Subject</label>
+                <input type="text" name="topic" id="topic" placeholder="Urgent: password reset required" value="{{ form_data.get('topic', '') }}" required>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-head">
+                <h2>Attack vector(s)</h2>
+                <span class="count">04</span>
+            </div>
+
+            <div class="vector-row">
+                <input type="checkbox" name="include_phone" id="include_phone" value="1" onchange="toggleVectorInput(this, 'phone_number')" {% if form_data.get('include_phone') %}checked{% endif %}>
+                <label for="include_phone">Phone number</label>
+                <input type="text" name="phone_number" id="phone_number" placeholder="+1 (555) 123-4567" value="{{ form_data.get('phone_number', '') }}" {% if not form_data.get('include_phone') %}disabled{% endif %}>
+            </div>
+            <div class="vector-row">
+                <input type="checkbox" name="include_weblink" id="include_weblink" value="1" onchange="toggleVectorInput(this, 'weblink')" {% if form_data.get('include_weblink') %}checked{% endif %}>
+                <label for="include_weblink">Web link</label>
+                <input type="text" name="weblink" id="weblink" placeholder="https://secure-login.example.com" value="{{ form_data.get('weblink', '') }}" {% if not form_data.get('include_weblink') %}disabled{% endif %}>
+            </div>
+            <div class="vector-row">
+                <input type="checkbox" name="include_attachment" id="include_attachment" value="1" onchange="toggleVectorInput(this, 'attachment')" {% if form_data.get('include_attachment') %}checked{% endif %}>
+                <label for="include_attachment">Attachment</label>
+                <input type="text" name="attachment" id="attachment" placeholder="Important_Document.pdf" value="{{ form_data.get('attachment', '') }}" {% if not form_data.get('include_attachment') %}disabled{% endif %}>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-head">
+                <h2>LLM</h2>
+                <span class="count">05</span>
+            </div>
+            <div class="field">
+                <label for="model">Model</label>
+                {% if available_models %}
+                <select name="model" id="model" required>
+                    {% for m in available_models %}
+                    <option value="{{ m }}" {% if form_data.get('model') == m %}selected{% endif %}>{{ m }}</option>
+                    {% endfor %}
+                </select>
+                {% else %}
+                <select name="model" id="model" disabled>
+                    <option value="">No models found — is Ollama running?</option>
+                </select>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="submit-row">
+            <button type="submit" class="submit-btn" id="submitBtn">Generate phishing email</button>
+        </div>
+    </form>
+
+    {% if email %}
+    <div class="result">
+        <div class="result-head">
+            <h3>Generated email</h3>
+            <button type="button" class="copy-btn" id="copyBtn" onclick="copyResult()">Copy</button>
+        </div>
+        <pre id="resultText">{{ email }}</pre>
+    </div>
+    {% endif %}
+
+    <div class="footer">
+        <a href="https://guns.lol/january1073" target="_blank" rel="noopener">january1073</a>
+    </div>
+
+</div>
+
+<script>
+    function toggleVectorInput(checkbox, inputId) {
+        const input = document.getElementById(inputId);
+        input.disabled = !checkbox.checked;
+        if (!checkbox.checked) {
+            input.value = '';
+        }
+    }
+
+    function showCopyFeedback(label) {
+        const btn = document.getElementById('copyBtn');
+        const original = btn.textContent;
+        btn.textContent = label;
+        setTimeout(function () { btn.textContent = original; }, 1500);
+    }
+
+    function legacyCopy(text) {
+        const area = document.createElement('textarea');
+        area.value = text;
+        area.style.position = 'fixed';
+        area.style.top = '-1000px';
+        document.body.appendChild(area);
+        area.focus();
+        area.select();
+        let ok = false;
+        try {
+            ok = document.execCommand('copy');
+        } catch (err) {
+            ok = false;
+        }
+        document.body.removeChild(area);
+        return ok;
+    }
+
+    function copyResult() {
+        const text = document.getElementById('resultText').innerText;
+
+        if (window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(function () {
+                showCopyFeedback('Copied');
+            }).catch(function () {
+                showCopyFeedback(legacyCopy(text) ? 'Copied' : 'Copy failed');
+            });
+        } else {
+            showCopyFeedback(legacyCopy(text) ? 'Copied' : 'Copy failed');
+        }
+    }
+
+    (function () {
+        const form = document.querySelector('form');
+        const btn = document.getElementById('submitBtn');
+        if (!form || !btn) return;
+
+        form.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' && e.target !== btn) {
+                e.preventDefault();
+            }
+        });
+
+        let submitting = false;
+        form.addEventListener('submit', function (e) {
+            if (submitting) {
+                e.preventDefault();
+                return;
+            }
+            submitting = true;
+            btn.disabled = true;
+            btn.textContent = 'Generating…';
+        });
+    })();
+</script>
+
 </body>
 </html>
